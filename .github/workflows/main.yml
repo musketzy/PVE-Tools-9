@@ -1,12 +1,12 @@
-name:  Sync
+name:  Sync Fork
 
 permissions:
   contents: write
 
 on:
   schedule:
-    - cron: "0 0 * * *" # every day
-  workflow_dispatch:
+    - cron: "0 0 * * *" # 每天晚上0点自动执行
+  workflow_dispatch: # 允许手动执行
 
 jobs:
   sync_latest_from_upstream:
