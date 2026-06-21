@@ -2,8 +2,6 @@
 
 <div align="center">
 
-面向 Proxmox VE 9.x 的一键运维脚本，覆盖 VM 生命周期运维、宿主机网络 / 防火墙 / IPv6、GPU / PCI 直通、系统维护与第三方生态集成。
-
 [官网 / Docs](https://pve.oowo.cc) | [更新日志](https://pve.oowo.cc/update) | [FAQ](https://pve.oowo.cc/faq) | [English](./README_EN.md) | [日本語](./REAMDE-JP.md)
 
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
@@ -15,8 +13,17 @@
 
 </div>
 
-> [!CAUTION]
-> **Shell版本暂缓更新公告**
+>[!CAUTION]
+> **Shell版本恢复更新公告**
+> 
+> 经过一个比较混乱的调整，我决定恢复更新 Shell 版本。
+> 
+> 该版本将继续维护，后续会根据用户反馈和需求进行更新。
+>
+> 如果想了解为何辗转两次，可以在这里了解详细: [为什么Go版本憋不出来?](https://pve.u3u.icu/blog/why-go-version-is-not-updating/)
+
+<!-- > [!CAUTION]
+> **Shell版本停更公告**
 > 
 > 感谢大家一直以来对 PVE-Tools-9 的支持。随着项目功能的不断增加，目前的 Shell 脚本代码量已突破 13000 行。
 > 
@@ -25,7 +32,7 @@
 > 因此，我决定暂缓当前 Shell 版本的新功能开发（但不会EOL），仅做极其重大的致命 Bug 修复。该仓库将保持原样，不会删库，大家依然可以正常使用现有功能。
 > 
 > `main` 分支（Shell 版本）发布 v8.8.8 后将停止更新，后续正式版本推出后将切到主main分支。
-> 我目前已经开启了底层基于 Go 语言 的全新版本重构计划，后续维护将迁移至 Go 重构版本，Go 版本将继续免费开源,新版本将带来更好的稳定性、更友好的交互以及更严谨的环境校验，敬请期待。
+> 我目前已经开启了底层基于 Go 语言 的全新版本重构计划，后续维护将迁移至 Go 重构版本（[beta-go](https://github.com/PVE-Tools/PVE-Tools-9/tree/beta-go) 分支），Go 版本将继续免费开源,新版本将带来更好的稳定性、更友好的交互以及更严谨的环境校验，敬请期待。 -->
 
 
 ## 快速开始
