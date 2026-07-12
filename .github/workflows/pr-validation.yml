@@ -21,10 +21,22 @@ jobs:
       - name: Shell syntax check
         run: |
           bash -n PVE-Tools.sh
+          bash -n dev.sh
+          bash build.sh
+          bash -n dist/PVE-Tools.sh
           
+      - name: Shellcheck (built script)
+        run: |
+          shellcheck -f gcc dist/PVE-Tools.sh > shellcheck_dist_results.txt || true
+          cat shellcheck_dist_results.txt || true
+          if grep -q "error\|warning" shellcheck_dist_results.txt; then
+            echo "Shellcheck found issues in built script. Please fix them before merging."
+            exit 1
+          fi
+
       - name: Version consistency check
         run: |
-          SCRIPT_VERSION=$(grep "CURRENT_VERSION=" PVE-Tools.sh | cut -d'"' -f2)
+          SCRIPT_VERSION=$(grep "CURRENT_VERSION=" lib/config.sh | cut -d'"' -f2)
           VERSION_FILE_VERSION=$(cat VERSION 2>/dev/null)
           if [ "$SCRIPT_VERSION" != "$VERSION_FILE_VERSION" ]; then
             echo "Version inconsistency: script($SCRIPT_VERSION) != version file($VERSION_FILE_VERSION)"
