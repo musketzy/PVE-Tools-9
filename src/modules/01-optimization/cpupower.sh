@@ -77,6 +77,10 @@ cpupower_add() {
     echo "查看当前CPU模式"
     cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 
+    if ! confirm_action "写入 @reboot 计划任务（开机自动应用 CPU 模式 ${GOVERNOR}）"; then
+        log_info "已跳过开机任务写入，本次修改仅当前开机周期生效"
+        return 0
+    fi
     echo "正在添加开机任务"
     NEW_CRONTAB_COMMAND="sleep 10 && echo "${GOVERNOR}" | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor >/dev/null #CPU Power Mode"
     EXISTING_CRONTAB=$(crontab -l 2>/dev/null)
@@ -322,7 +326,7 @@ EOF
     # NVME 硬盘变量 (动态检测，参考 PVE 8 实现)
     log_info "检测系统中的 NVME 硬盘"
     nvi=0
-    for nvme in $(ls /dev/nvme[0-9] 2> /dev/null); do
+    for nvme in /dev/nvme[0-9]; do
         chmod +s /usr/sbin/smartctl 2>/dev/null
 
         cat >> $tmpf << EOF
@@ -337,7 +341,7 @@ EOF
     # SATA 硬盘变量 (动态检测，参考 PVE 8 实现)
     log_info "检测系统中的 SATA 固态和机械硬盘"
     sdi=0
-    for sd in $(ls /dev/sd[a-z] 2> /dev/null); do
+    for sd in /dev/sd[a-z]; do
         chmod +s /usr/sbin/smartctl 2>/dev/null
         chmod +s /usr/sbin/hdparm 2>/dev/null
 
